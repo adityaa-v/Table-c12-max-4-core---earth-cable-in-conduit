@@ -28,7 +28,7 @@ class Application(Frame):
         self.PVCLabel = Label (master, text = "Cable Type", height=2, width=20)#Label
         self.PVCLabel.grid(row=1, column = 0)
         
-        self.PVC_flat = Label (master, text = "PVC FLAT Cable Type", height=2, width=20)#Label
+        self.PVC_flat = Label (master, text = "XLPE Cable Type", height=2, width=20)#Label
         self.PVC_flat.grid(row=2, column = 0)
 
         self.cable = StringVar(master)
@@ -60,6 +60,9 @@ class Application(Frame):
         self.PVCResult = Label (master, text = "Cable Type-> ", height=2, width=25) #Label
         self.PVCResult.grid(row=1, column =2)    
 
+        self.XLPE = Label (master, text = "", height=2, width=25) #Label
+        self.XLPE.grid(row=2, column =2)  
+
         self.circuitNo = Label (master, text = "Number of Circuits-> ", height=2, width=25) #Label
         self.circuitNo.grid(row=2, column =2)   
 
@@ -87,33 +90,31 @@ class Application(Frame):
             return self.x
         def getCable(self):
             self.x = self.cable.get()
-            return self.x   
+            return int(self.x)   
         def XLPE(self):
             self.x = self.cablePVC.get()
             return self.x              
         def getCircuitState(self):
             self.x = self.getCircuit.get()          
-            return self.x 
+            return int(self.x) 
 
-        
-        #error messages 
-        # if len(getCircuitState(self))==0:
-        #     self.conduitResult.configure(text="Circuit has not been entered ", bg='orange' )       
         if (getCable(self)=="-"):
             self.conduitResult.configure(text="Cable length has not been selected ", bg='orange' )      
-        # if len(getCircuitState(self))==0:
-        #     if (getCable(self)=="-"):
-        #         self.conduitResult.configure(text="Please enter some values", bg='red' )
               
-
-        self.conduitTypeResult.configure(text="Conduit Type:  " + self.conduit.get(), font='Helvetica 9 bold')
-
+        self.conduitTypeResult.configure(text="Conduit Type:  " + self.conduit.get(), font='Helvetica 9 bold')      
+        
         if (getCable(self)=="-"):
-            self.PVCResult.configure(text="-")
+            self.PVCResult.configure(text="" + self.cable.get(),font='Helvetica 9 bold' )
         else:
-            self.PVCResult.configure(text="CableType:  " + self.cable.get(),font='Helvetica 9 bold' )
+            self.PVCResult.configure(text="Cable Type:  " + self.cable.get(),font='Helvetica 9 bold' )
+
+        if (XLPE(self)=="-"):
+            self.getXLPE.configure(text="" + self.cablePVC.get(),font='Helvetica 9 bold' )
+        else:
+            self.getXLPE.configure(text="Cable Type:  " + self.cablePVC.get(),font='Helvetica 9 bold' ) 
         
         self.circuitNo.configure(text="Number of Circuits:  "+ self.getCircuit.get(), font='Helvetica 9 bold')
+
 
 
         def circuitNo(self):
