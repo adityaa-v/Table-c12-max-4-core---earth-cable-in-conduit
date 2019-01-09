@@ -2,8 +2,8 @@ from tkinter import *
 
 conduitType = ["Heavy duty rigid UPVC conduit", "Corflo conduit", 
 "Medium duty corrugated", "Medium duty rigid UPVC conduit"]
-CableType = ["-", "1.5", "2.5", "4" , "6" ,"10" ,"16", "25",'35','50','70','95']
-XLPE = ["-", "16","25","35","50","70","95","120"]
+CableType = ['-', '1.5', '2.5', '4' , '6' ,'10' ,'16', '25','35','50','70','95']
+XLPE = ['-', '16','25','35','50','70','95','120']
 
 class Application(Frame):
 
@@ -64,14 +64,25 @@ class Application(Frame):
         self.XLPE.grid(row=2, column =2)  
 
         self.circuitNo = Label (master, text = "Number of Circuits-> ", height=2, width=25) #Label
-        self.circuitNo.grid(row=2, column =2)   
+        self.circuitNo.grid(row=3, column =2)   
 
         self.conduitResult = Label (master, text = "-", height=2, width=40, font='Helvetica 9 bold') #Label
         self.conduitResult.grid(row=4, column =2)    
 
         self.close = Button(master, text="Close", bg="light grey", command=master.destroy)
         self.close.grid(row = 5,column=0) 
-   
+
+        def openImage():
+            control = Toplevel()
+            canvas = Canvas(control, width=1309, height=761)
+            canvas.pack(expand = YES, fill = BOTH)
+            png1 = PhotoImage(file='C:\\Users\\Aditya.Verma\\Documents\\GitHub\\Table-c12-max-4-core---earth-cable-in-conduit\\Capture.PNG')
+            canvas.create_image(0, 0, image = png1, anchor = NW)
+            canvas.png1 = png1
+
+        self.openImage = Button(master, text="Open Table", bg="light grey", command=openImage)#image open button
+        self.openImage.grid(row=5, column = 1)
+        
         def reset():
              self.PVCResult.configure(text="" )
              self.conduitTypeResult.configure(text="-" )
@@ -90,7 +101,7 @@ class Application(Frame):
             return self.x
         def getCable(self):
             self.x = self.cable.get()
-            return int(self.x)   
+            return self.x 
         def XLPE(self):
             self.x = self.cablePVC.get()
             return self.x              
@@ -98,8 +109,8 @@ class Application(Frame):
             self.x = self.getCircuit.get()          
             return int(self.x) 
 
-        if (getCable(self)=="-"):
-            self.conduitResult.configure(text="Cable length has not been selected ", bg='orange' )      
+        if not self.getCircuit.get():
+            self.conduitResult.configure(text="No. of Circuits has not been selected ", bg='orange' )      
               
         self.conduitTypeResult.configure(text="Conduit Type:  " + self.conduit.get(), font='Helvetica 9 bold')      
         
@@ -109,9 +120,10 @@ class Application(Frame):
             self.PVCResult.configure(text="Cable Type:  " + self.cable.get(),font='Helvetica 9 bold' )
 
         if (XLPE(self)=="-"):
-            self.getXLPE.configure(text="" + self.cablePVC.get(),font='Helvetica 9 bold' )
+            self.XLPE.configure(text="" + self.cablePVC.get(),font='Helvetica 9 bold' )
         else:
-            self.getXLPE.configure(text="Cable Type:  " + self.cablePVC.get(),font='Helvetica 9 bold' ) 
+            self.XLPE.configure(text="Cable Type:  " + self.cablePVC.get(),font='Helvetica 9 bold' ) 
+        
         
         self.circuitNo.configure(text="Number of Circuits:  "+ self.getCircuit.get(), font='Helvetica 9 bold')
 
@@ -654,7 +666,6 @@ class Application(Frame):
                 if(getCable(self)=='1.5' or getCable(self)=='2.5' or getCable(self)=='4' or getCable(self)=='4' and getCircuitState(self) <= int("0")):
                     return "20"
                 
-
                 if(getCable(self)=='10' or getCable(self)=='16' or getCable(self)=='25' or getCable(self)=='4' and getCircuitState(self) <= int("0")):
                     return "16, 20, 25 or 32"
 
@@ -667,25 +678,22 @@ class Application(Frame):
                 if(getCable(self)=="16" or getCable(self)=='10' or getCable(self)=='25' and getCircuitState(self)<= int("1")):
                     return "50"
                 
-                
-
             else:
                 return "Invalid input, please check again"
 
-        # if len(getCircuitState(self))!=0:
-        #     if (getCable(self)!="-"):
-
         
+
         self.conduitResult.configure(text="Number of Conduits: \n" + circuitNo(self), bg='green2')
-        
-    
-    
-    
+        if (circuitNo(self)=="Invalid input, please check again"):
+            self.conduitResult.configure(bg='red')
 
-            
+        
+
+    
+           
 master = Tk()
 master.title("Number of Conduits. Table C12")
-master.geometry("750x200")
+master.geometry("750x220")
 app = Application(master)
 
 master.mainloop()
