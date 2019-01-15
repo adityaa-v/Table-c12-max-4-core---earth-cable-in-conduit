@@ -10,7 +10,6 @@ class Application(Frame):
     def __init__(self, master):
         """ Initialise the Frame. """
         super(Application, self).__init__(master)
-        self.UserIn = IntVar()
         self.grid()
         self.create_widgets()
 
@@ -70,7 +69,14 @@ class Application(Frame):
         self.conduitResult.grid(row=4, column =2)    
 
         self.close = Button(master, text="Close", bg="light grey", command=master.destroy)
-        self.close.grid(row = 5,column=0) 
+        self.close.grid(row = 5,column=0)
+
+        self.disclaimerText = Label (master, text = """DISCLAIMER\n Please refer to the Table (can be accessed by clicking Open Table button)
+         to confirm the results before practically applying the Number Of Conduits. Each output has not been tested thus 
+         caution should be taken when using this program.\n
+         REFERENCE: AS/NZ 3000:2018 Electrical Installations (known as the Australian/New Zeealand Wiring Rules"""
+        ,font='Helvetica 9 bold') #Label
+        self.disclaimerText.grid(row=6, rowspan=2, column=0, columnspan=3, sticky=W)     
 
         def openImage():
             control = Toplevel()
@@ -123,30 +129,27 @@ class Application(Frame):
             self.XLPE.configure(text="" + self.cablePVC.get(),font='Helvetica 9 bold' )
         else:
             self.XLPE.configure(text="Cable Type:  " + self.cablePVC.get(),font='Helvetica 9 bold' ) 
-        
-        
+                
         self.circuitNo.configure(text="Number of Circuits:  "+ self.getCircuit.get(), font='Helvetica 9 bold')
-
-
 
         def circuitNo(self):
 
             if (getConduitType(self)=="Heavy duty rigid UPVC conduit"):
-
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" and getCircuitState(self)<= int("0")):
+                    
+                if((getCable(self)=="1.5" or getCable(self)=="2.5") and getCircuitState(self)<= int("0")):
                     return "20"
-                if(getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("0")):
                     return "20 or 25"
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="1.5" or getCable(self)=="2.5") and getCircuitState(self)<= int("1")):
                     return "25 or 32"
-                if(getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("1")):
                     return "32 or 40"
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("3")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("3")):
                     return "40"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("2")):
                     return "40"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("5")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("5")):
                     return "50"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("4")):
                     return "50"
@@ -155,7 +158,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("2")):
                     return "50"
 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("9")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("9")):
                     return "63"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("6")):
                     return "63"
@@ -164,7 +167,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("4")):
                     return "63"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("16")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("16")):
                     return "80 (NZ)"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("12")):
                     return "80 (NZ)"
@@ -173,7 +176,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("8")):
                     return "80 (NZ)"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("18")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("18")):
                     return "80 (AUS)"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("14")):
                     return "80 (AUS)"
@@ -182,7 +185,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("9")):
                     return "80 (AUS)"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("29")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("29")):
                     return "100 (NZ)"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("21")):
                     return "100 (NZ)"
@@ -191,7 +194,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("14")):
                     return "100 (NZ)"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("31")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("31")):
                     return "100 (AUS)"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("23")):
                     return "100 (AUS)"
@@ -200,7 +203,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("15")):
                     return "100 (AUS)"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("47")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("47")):
                     return "125"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("35")):
                     return "125"
@@ -209,7 +212,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("23")):
                     return "125"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("61")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("61")):
                     return "150"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("46")):
                     return "150"
@@ -218,26 +221,26 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("31")):
                     return "150"
                 
-                if(getCable(self)=="10" or getCable(self)=="16" or getCable(self)=="25" or getCable(self)=="35"
-                or getCable(self)=="50"  or getCable(self)=="70" or getCable(self)=="95" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="10" or getCable(self)=="16" or getCable(self)=="25" or getCable(self)=="35"
+                or getCable(self)=="50"  or getCable(self)=="70" or getCable(self)=="95") and getCircuitState(self)<= int("0")):
                     return "20, 25 or 32"
                 
-                if(getCable(self)=="25" or getCable(self)=="35"
-                or getCable(self)=="50"  or getCable(self)=="70" or getCable(self)=="95" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="25" or getCable(self)=="35"
+                or getCable(self)=="50"  or getCable(self)=="70" or getCable(self)=="95") and getCircuitState(self)<= int("0")):
                     return "40"
                 
-                if(getCable(self)=="50"  or getCable(self)=="70" or getCable(self)=="95" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="50"  or getCable(self)=="70" or getCable(self)=="95") and getCircuitState(self)<= int("0")):
                     return "50"
                 
-                if(getCable(self)=="10" or getCable(self)=="16" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="10" or getCable(self)=="16") and getCircuitState(self)<= int("1")):
                     return "40"
                 
-                if(getCable(self)=="10" or getCable(self)=="16" or getCable(self)=="25" or getCable(self)=="35"
-                or getCable(self)=="50"  and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="10" or getCable(self)=="16" or getCable(self)=="25" or getCable(self)=="35"
+                or getCable(self)=="50")  and getCircuitState(self)<= int("1")):
                     return "50"
                 
-                if(getCable(self)=="16" or getCable(self)=="25" or getCable(self)=="35"
-                or getCable(self)=="95" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="16" or getCable(self)=="25" or getCable(self)=="35"
+                or getCable(self)=="95") and getCircuitState(self)<= int("0")):
                     return "63"
                 
                 if(getCable(self)=="10" and getCircuitState(self)<= int("2")):
@@ -335,21 +338,21 @@ class Application(Frame):
                 
                 
                 
-                if(XLPE(self)=="16" or XLPE(self)=="25" or XLPE(self)=="35" or XLPE(self)=="50"
-                or XLPE(self)=="70" or XLPE(self)=="95" or XLPE(self)=="120" and getCircuitState(self)<= int("0")):
+                if((XLPE(self)=="16" or XLPE(self)=="25" or XLPE(self)=="35" or XLPE(self)=="50"
+                or XLPE(self)=="70" or XLPE(self)=="95" or XLPE(self)=="120") and getCircuitState(self)<= int("0")):
                     return "20, 25 or 32"
 
-                if(XLPE(self)=="25" or XLPE(self)=="35" or XLPE(self)=="50"
-                or XLPE(self)=="70" or XLPE(self)=="95" or XLPE(self)=="120" and getCircuitState(self)<= int("0")):
+                if((XLPE(self)=="25" or XLPE(self)=="35" or XLPE(self)=="50"
+                or XLPE(self)=="70" or XLPE(self)=="95" or XLPE(self)=="120") and getCircuitState(self)<= int("0")):
                     return "40"
 
                 if(XLPE(self)=="16" and getCircuitState(self)<= int("1")):
                     return "40"
                 
-                if(XLPE(self)=="50" or XLPE(self)=="70" or XLPE(self)=="95" or XLPE(self)=="120" and getCircuitState(self)<= int("0")):
+                if((XLPE(self)=="50" or XLPE(self)=="70" or XLPE(self)=="95" or XLPE(self)=="120") and getCircuitState(self)<= int("0")):
                     return "50"
                 
-                if(XLPE(self)=="16" or XLPE(self)=="25" or XLPE(self)=="35" and getCircuitState(self)<= int("1")):
+                if((XLPE(self)=="16" or XLPE(self)=="25" or XLPE(self)=="35") and getCircuitState(self)<= int("1")):
                     return "50"
 
                 if(XLPE(self)=="16" and getCircuitState(self)<= int("3")):
@@ -459,7 +462,7 @@ class Application(Frame):
             
             if (getConduitType(self)=="Corflo conduit"):
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("29")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("29")):
                     return "100 (NZ)"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("21")):
                     return "100 (NZ)"
@@ -468,7 +471,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("14")):
                     return "100 (NZ)"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("30")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("30")):
                     return "100 (AUS)"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("22")):
                     return "100 (AUS)"
@@ -477,7 +480,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("15")):
                     return "100 (AUS)"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("45")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("45")):
                     return "125"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("33")):
                     return "125"
@@ -486,7 +489,7 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("22")):
                     return "125"
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("59")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("59")):
                     return "150."
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("44")):
                     return "150."
@@ -606,55 +609,55 @@ class Application(Frame):
 
             if (getConduitType(self)=="Medium duty corrugated"):
                 
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("0")):
                     return "20"  
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("1")):
                     return "25"  
 
-                if(getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("0")):
                     return "25"   
 
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("1")):
                     return "32" 
 
-                if(getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("1")):
                     return "40"        
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("2")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("2")):
                     return "20"  
                 
                 if(getCable(self)=='10' and getCircuitState(self) <= int("7")):
                     return "80 (NZ)"
 
             if (getConduitType(self)=="Medium duty rigid UPVC conduit"):
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("0")):
                     return "16"     
                 
-                if(getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("0")):
+                if((getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("0")):
                     return "20" 
                 
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("1")):
                     return "32" 
                 
-                if(getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="1.5" or getCable(self)=="2.5" or getCable(self)=="4") and getCircuitState(self)<= int("1")):
                     return "25" 
                 
-                if(getCable(self)=="4" or getCable(self)=="6" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="4" or getCable(self)=="6") and getCircuitState(self)<= int("1")):
                     return "40" 
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("1")):
                     return "20" 
                 
                 if(getCable(self)=="6" and getCircuitState(self)<= int("0")):
                     return "25" 
                 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("3")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("3")):
                     return "40" 
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("2")):
                     return "40" 
 
-                if(getCable(self)=="1.5" and getCircuitState(self)<= int("5")):
+                if((getCable(self)=="1.5") and getCircuitState(self)<= int("5")):
                     return "50"
                 if(getCable(self)=="2.5" and getCircuitState(self)<= int("4")):
                     return "50"
@@ -663,40 +666,32 @@ class Application(Frame):
                 if(getCable(self)=="6" and getCircuitState(self)<= int("2")):
                     return "50"
 
-                if(getCable(self)=='1.5' or getCable(self)=='2.5' or getCable(self)=='4' or getCable(self)=='4' and getCircuitState(self) <= int("0")):
+                if((getCable(self)=='1.5' or getCable(self)=="2.5" or getCable(self)=='4' or getCable(self)=='4') and getCircuitState(self) <= int("0")):
                     return "20"
                 
-                if(getCable(self)=='10' or getCable(self)=='16' or getCable(self)=='25' or getCable(self)=='4' and getCircuitState(self) <= int("0")):
+                if((getCable(self)=='10' or getCable(self)=='16' or getCable(self)=='25' or getCable(self)=='4') and getCircuitState(self) <= int("0")):
                     return "16, 20, 25 or 32"
 
                 if(getCable(self)=="25" and getCircuitState(self)<= int("0")):
                     return "40"
                 
-                if(getCable(self)=="16" or getCable(self)=='10' and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="16" or getCable(self)=='10') and getCircuitState(self)<= int("1")):
                     return "40"
                 
-                if(getCable(self)=="16" or getCable(self)=='10' or getCable(self)=='25' and getCircuitState(self)<= int("1")):
+                if((getCable(self)=="16" or getCable(self)=='10' or getCable(self)=='25') and getCircuitState(self)<= int("1")):
                     return "50"
-                
+                                    
             else:
                 return "Invalid input, please check again"
-
         
-
-        self.conduitResult.configure(text="Number of Conduits: \n" + circuitNo(self), bg='green2')
+        self.conduitResult.configure(text="Number of Conduits:\n" + circuitNo(self), bg='green2')
         if (circuitNo(self)=="Invalid input, please check again"):
             self.conduitResult.configure(bg='red')
 
-        
-
-    
-           
+                   
 master = Tk()
 master.title("Number of Conduits. Table C12")
-master.geometry("750x220")
+master.geometry("700x325")
 app = Application(master)
 
 master.mainloop()
-
-
-
