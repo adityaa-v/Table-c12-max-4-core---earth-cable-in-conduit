@@ -86,6 +86,12 @@ class Application(Frame):
             canvas.create_image(0, 0, image = png1, anchor = NW)
             canvas.png1 = png1
 
+        self.canvas = Canvas(master, width=99, height=30)
+        self.canvas.grid(row=5, column=2)
+        self.logo = PhotoImage(file='C:\\Users\\Aditya.Verma\\Documents\\GitHub\\Table-c10---max-single-core-sheathed-cables\\Lucid Logo.PNG')
+        self.canvas.create_image(0, 0, image = self.logo, anchor = NW)
+        self.canvas.logo = self.logo   
+
         self.openImage = Button(master, text="Open Table", bg="light grey", command=openImage)#image open button
         self.openImage.grid(row=5, column = 1)
         
@@ -684,7 +690,7 @@ class Application(Frame):
             else:
                 return "Invalid input, please check again"
         
-        self.conduitResult.configure(text="Number of Conduits:\n" + circuitNo(self), bg='green2')
+        self.conduitResult.configure(text="Conduit Size:\n" + circuitNo(self), bg='green2')
         if (circuitNo(self)=="Invalid input, please check again"):
             self.conduitResult.configure(bg='red')
 
